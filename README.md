@@ -32,7 +32,9 @@ Here is a list of some planned modules:
 
 ### Status
 ✔️ - Implemented as stable
+
 ⚠️ - Implemented as unstable/experimental (Turned off by default)
+
 ❌ - Not implemented
 
 ## High customizablity
