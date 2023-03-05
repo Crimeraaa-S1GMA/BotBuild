@@ -28,6 +28,7 @@ Here is a list of some planned modules:
 - Games (canvas like r/place, server economy, etc.) (❌)
 - Giveaways (chooses a random winner, can check for conditions such as having sent enough messages, being in the server for long enough etc.) (❌)
 - Utilities (a shit ton of commands which perform various functions, but do not fit into any of the other categories) (❌)
+- Support for external APIs (you need to configure the access on your own, and some of these APIs might need you to pay a fee to use them) (❌)
 - Custom commands (there can be as much as your computer/server can handle, and they can use a versatile variable system, perform actions, access third-party APIs etc.) (❌)
 
 ### Status
@@ -43,5 +44,10 @@ Almost every aspect of your bot can be configured the way YOU want it to work.
 As mentioned before, the components used can be toggled on or off, and using the GUI or config file, you can alter how the work of individual commands performs.
 
 # Dependencies
+This list may be expanded in the future, as the tool is still in a planning stage, and I haven't decided which modules to use yet.
+
 - tkinter (for GUI dashboard, optional)
 - discord.py (for bot backend)
+
+# Limitations
+Currently the bot's access is planned to be limited to just one server, however this may change in the future.
