@@ -23,7 +23,8 @@ Here is a list of some planned modules:
 - Reaction roles (highly customizable, can be used for verification systems etc.) (❌)
 - Server statistics (messages sent, non-bot members who joined) (❌)
 - Welcome/Farewell messages (can be customized to your heart's content, and used in any channel you want) (❌)
-
+- Logging (informs the admins about any moderation actions that have been performed in the guild) (❌)
+- Utilities (a shit ton of commands which perform various functions, but do not fit into any of the other categories) (❌)
 - Custom commands (there can be as much as your computer/server can handle, and they can use a versatile variable system, perform actions, access third-party APIs etc.) (❌)
 
 ## High customizablity
