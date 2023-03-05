@@ -30,6 +30,11 @@ Here is a list of some planned modules:
 - Utilities (a shit ton of commands which perform various functions, but do not fit into any of the other categories) (❌)
 - Custom commands (there can be as much as your computer/server can handle, and they can use a versatile variable system, perform actions, access third-party APIs etc.) (❌)
 
+### Status
+✔️ - Implemented as stable
+⚠️ - Implemented as unstable/experimental (Turned off by default)
+❌ - Not implemented
+
 ## High customizablity
 Almost every aspect of your bot can be configured the way YOU want it to work.
 
