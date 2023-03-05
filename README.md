@@ -3,6 +3,8 @@
 # BotBuild
 An open-source, self-hosted alternative to mainstream Discord bots, written in Python.
 
+It's pretty easy to use and commands are available to use out of the box, more can be added by either coding in your own stuff into the program, or by using the built-in custom command system. I guess you could consider this an open source BotGhost alternative.
+
 # Features
 As of right now, nothing listed here is properly implemented. Those are all planned features!
 
@@ -20,6 +22,8 @@ Here is a list of some planned modules:
 - Leveling (with support for role rewards, and that is for free!) (❌)
 - Reaction roles (highly customizable, can be used for verification systems etc.) (❌)
 - Server statistics (messages sent, non-bot members who joined) (❌)
+- Welcome/Farewell messages (can be customized to your heart's content, and used in any channel you want) (❌)
+
 - Custom commands (there can be as much as your computer/server can handle, and they can use a versatile variable system, perform actions, access third-party APIs etc.) (❌)
 
 ## High customizablity
