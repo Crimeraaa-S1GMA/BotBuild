@@ -1,4 +1,4 @@
-**Note:** As of right now, the only thing present in this repository is this readme. Keep in mind, that I also have a game to work on (I'd like to prioritize that, but also work on BotBuild at that time) and IRL stuff to do, so development might take a while. I hope this is understandable!
+**Note:** As of right now, the only thing present in this repository is this readme. Keep in mind, that I also have a game to work on (I'd like to prioritize that, but also work on BotBuild at that time) and IRL stuff to do, so development might take a while. I'd release the first public version when there's some basic stuff ready, laying a foundation for this project. I hope this is understandable!
 
 # BotBuild
 An open-source, self-hosted alternative to mainstream Discord bots, written in Python.
