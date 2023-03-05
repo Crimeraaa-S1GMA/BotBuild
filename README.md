@@ -10,17 +10,17 @@ As of right now, nothing listed here is properly implemented. Those are all plan
 - Very modular, different components can be toggled depending on which ones you need.
 - A user-friendly dashboard made using Tkinter which allows control over your bot.
 - Uses configuration files for the bot setup, allowing quick deployment in a new environment.
-- Support for custom commands, which can contain variables (which are very versatile), perform actions on users, perform HTTP requests and much more.
 
 ## Modules
 BotBuild will support many modules which can be turned on or off depending on your needs, and you can also disable commands which you do not need.
 
 Here is a list of some planned modules:
-- Moderation (bans, mutes, etc.)
-- Polls (can contain multiple different choices, are anonymous, and use Discord's option buttons)
-- Leveling (with support for role rewards, and that is for free!)
-- Reaction roles (highly customizable, can be used for verification systems etc.)
-- Server statistics (messages sent, non-bot members who joined)
+- Moderation (bans, mutes, etc.) (❌)
+- Polls (can contain multiple different choices, are anonymous, and use Discord's option buttons) (❌)
+- Leveling (with support for role rewards, and that is for free!) (❌)
+- Reaction roles (highly customizable, can be used for verification systems etc.) (❌)
+- Server statistics (messages sent, non-bot members who joined) (❌)
+- Custom commands (there can be as much as your computer/server can handle, and they can use a versatile variable system, perform actions, access third-party APIs etc.) (❌)
 
 ## High customizablity
 Almost every aspect of your bot can be configured the way YOU want it to work.
