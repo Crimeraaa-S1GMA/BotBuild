@@ -3,12 +3,12 @@
 # BotBuild
 An open-source, self-hosted alternative to mainstream Discord bots, written in Python.
 
-It's pretty easy to use and commands are available to use out of the box, more can be added by either coding in your own stuff into the program, or by using the built-in custom command system. I guess you could consider this an open source BotGhost alternative.
+It's designed to be easy to use and quick to set up.
 
 # Features
 As of right now, nothing listed here is properly implemented. Those are all planned features!
 
-## Design
+## Design philosophy
 - Very modular, different components can be toggled depending on which ones you need.
 - A user-friendly dashboard made using Tkinter which allows control over your bot.
 - Uses configuration files for the bot setup, allowing quick deployment in a new environment.
