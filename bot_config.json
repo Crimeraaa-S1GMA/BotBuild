@@ -1,0 +1,15 @@
+{
+  "token" : "",
+  "welcome_module_enabled" : true,
+  "welcome_module_user_join_enabled" : true,
+  "welcome_module_user_leave_enabled" : true,
+  "welcome_module_user_join_message" : "Welcome {member_mention}!",
+  "welcome_module_user_leave_message" : "Farewell {member_mention}!",
+  "welcome_module_incl_bots_join" : false,
+  "welcome_module_incl_bots_leave" : false,
+  "welcome_module_join_role_ids" : [0],
+  "welcome_module_join_channel" : 0,
+  "welcome_module_leave_channel" : 0,
+  "cyka_blyat_easter_egg" : true,
+  "cyka_blyat_answer" : "Cyka Blyat, {member_mention} is Blyatiful"
+}
