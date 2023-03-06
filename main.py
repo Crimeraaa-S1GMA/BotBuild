@@ -66,3 +66,5 @@ tree = app_commands.CommandTree(client)
 
 
 client.run(config_json["token"])
+
+# test
