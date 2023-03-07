@@ -3,6 +3,8 @@ An open-source, self-hosted alternative to mainstream Discord bots, written in P
 
 It's designed to be easy to use and quick to set up.
 
+Coming later in 2023 (if all goes well)
+
 # Features
 As of right now, nothing listed here is properly implemented. Those are all planned features!
 
