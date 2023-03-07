@@ -39,6 +39,7 @@ class BotBuildClient(discord.Client):
             channel = client.get_channel(config_json["welcome_module_leave_channel"])
             await channel.send(config_json["welcome_module_user_leave_message"].format(member_mention=member.mention))
 
+    # Reaction test
     async def on_raw_reaction_add(self, payload):
         message = await client.get_channel(payload.channel_id).fetch_message(payload.message_id)
         await message.clear_reactions()
