@@ -1,3 +1,5 @@
+**Note:** Right now, the bot isn't in active development, as I am 100% focused on working on my upcoming game, [Comer](https://gamejolt.com/games/comer/788131). Consider checking it out! Once I am done with it, I'll get back to working on BotBuild.
+
 # BotBuild
 An open-source, self-hosted alternative to mainstream Discord bots, written in Python.
 
