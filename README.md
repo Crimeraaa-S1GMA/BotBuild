@@ -12,7 +12,7 @@ As of right now, nothing listed here is properly implemented. Those are all plan
 
 ## Design philosophy
 - Very modular, different components can be toggled depending on which ones you need.
-- A user-friendly dashboard made using Tkinter which allows control over your bot.
+- A user-friendly dashboard running in the browser which allows control over your bot.
 - Uses configuration files for the bot setup, allowing quick deployment in a new environment.
 
 ## Modules
