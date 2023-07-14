@@ -7,7 +7,7 @@ class BotBuildClient(discord.Client):
     async def on_ready(self):
         activity = discord.Game(name="Made with BotBuild", type=3)
         await client.change_presence(status=discord.Status.online, activity=activity)
-        await tree.sync(guild=discord.Object(id=1081978875178909787))
+        await tree.sync(guild=discord.Object(id=1126581141642674267))
         print(f'Logged on as {self.user.name}!')
 
     async def on_guild_join(self, guild):
@@ -17,11 +17,6 @@ class BotBuildClient(discord.Client):
     async def on_message(self, message):
         if message.author == client.user:
             return
-
-        if ("suka" in message.content.lower() or "cyka" in message.content.lower()
-                or "blya" in message.content.lower() or "сука" in message.content.lower()
-                or "бля" in message.content.lower()) and config_json["cyka_blyat_easter_egg"]:
-            await message.channel.send(config_json["cyka_blyat_answer"].format(member_mention=message.author.mention))
 
     async def on_member_join(self, member):
         if config_json["welcome_module_enabled"] and config_json["welcome_module_user_join_enabled"] \
@@ -50,6 +45,11 @@ config_json = json.loads(config_file.read())
 
 config_file.close()
 
+token_file = open("token.txt", "r")
+loaded_token = token_file.read()
+
+token_file.close()
+
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
@@ -66,4 +66,4 @@ tree = app_commands.CommandTree(client)
 #    await interaction.response.send_message("Biggest balls of the summer\nIf you ain't cumming that's a bummer")
 
 
-client.run(config_json["token"])
+client.run(loaded_token)
