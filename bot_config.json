@@ -3,7 +3,7 @@
   "welcome_module_user_join_enabled" : true,
   "welcome_module_user_leave_enabled" : true,
   "welcome_module_user_join_message" : "Welcome {member_mention}!",
-  "welcome_module_user_leave_message" : "Farewell {member_mention}!",
+  "welcome_module_user_leave_message" : "Goodbye {member_mention}!",
   "welcome_module_incl_bots_join" : false,
   "welcome_module_incl_bots_leave" : false,
   "welcome_module_join_role_ids" : [1082379758853169172],
