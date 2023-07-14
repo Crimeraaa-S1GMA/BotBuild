@@ -68,6 +68,10 @@ intents.reactions = True
 client = BotBuildClient(intents=intents)
 tree = app_commands.CommandTree(client)
 
+    
+@tree.command(name="test", description="This is a test command", guild=discord.Object(1126581141642674267))
+async def test(interaction : discord.Interaction, member : discord.Member):
+    await interaction.response.send_message("aaaaaaaaa")
 
 # Crappy test command
 # @tree.command(name="balls", description="Test command", guild=discord.Object(id=1081978875178909787))
