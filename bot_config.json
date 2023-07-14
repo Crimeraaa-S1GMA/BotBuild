@@ -8,7 +8,5 @@
   "welcome_module_incl_bots_leave" : false,
   "welcome_module_join_role_ids" : [1082379758853169172],
   "welcome_module_join_channel" : 1082026012516286567,
-  "welcome_module_leave_channel" : 1082026012516286567,
-  "cyka_blyat_easter_egg" : true,
-  "cyka_blyat_answer" : "Cyka Blyat, {member_mention} is Blyatiful"
+  "welcome_module_leave_channel" : 1082026012516286567
 }
