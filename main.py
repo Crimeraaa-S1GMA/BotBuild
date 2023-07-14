@@ -2,6 +2,7 @@ import discord
 import json
 from discord import app_commands
 
+sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta"]
 
 class BotBuildClient(discord.Client):
     async def on_ready(self):
@@ -17,6 +18,19 @@ class BotBuildClient(discord.Client):
     async def on_message(self, message):
         if message.author == client.user:
             return
+        
+        found_sus = False
+
+        for word in sussy_words:
+            if word in message.content.lower().replace(" ", "").replace("\n", ""):
+                found_sus = True
+        
+        if found_sus:
+            await message.add_reaction("🤨")
+            await message.add_reaction("🇸")
+            await message.add_reaction("🇺")
+            await message.add_reaction("5️⃣")
+            await message.channel.send("SUS! :face_with_raised_eyebrow:")
 
     async def on_member_join(self, member):
         if config_json["welcome_module_enabled"] and config_json["welcome_module_user_join_enabled"] \
@@ -33,11 +47,6 @@ class BotBuildClient(discord.Client):
                 and member.guild == client.get_channel(config_json["welcome_module_leave_channel"]).guild:
             channel = client.get_channel(config_json["welcome_module_leave_channel"])
             await channel.send(config_json["welcome_module_user_leave_message"].format(member_mention=member.mention))
-
-    # Reaction test
-    async def on_raw_reaction_add(self, payload):
-        message = await client.get_channel(payload.channel_id).fetch_message(payload.message_id)
-        await message.clear_reactions()
 
 
 config_file = open("bot_config.json", "r")
