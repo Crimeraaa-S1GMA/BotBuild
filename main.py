@@ -6,8 +6,8 @@ sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta"]
 
 class BotBuildClient(discord.Client):
     async def on_ready(self):
-        activity = discord.Game(name="Made with BotBuild", type=3)
-        await client.change_presence(status=discord.Status.online, activity=activity)
+        activity = discord.Activity(name="Made with BotBuild", type=discord.ActivityType.watching)
+        await client.change_presence(status=discord.Status.do_not_disturb, activity=activity)
         await tree.sync(guild=discord.Object(id=1126581141642674267))
         print(f'Logged on as {self.user.name}!')
 
