@@ -1,5 +1,3 @@
-**Note:** Right now, the bot isn't in active development, as I am 100% focused on working on the level editor for my game, [Comer](https://gamejolt.com/games/comer/788131). Consider checking it out! Once I am done with it, I'll get back to working on BotBuild.
-
 # BotBuild
 An open-source, self-hosted alternative to mainstream Discord bots, written in Python.
 
@@ -19,7 +17,7 @@ As of right now, nothing listed here is properly implemented. Those are all plan
 BotBuild will support many modules which can be turned on or off depending on your needs, and you can also disable commands which you do not need.
 
 Here is a list of some planned modules:
-- Moderation (bans, mutes, etc.) (❌)
+- Moderation (bans, mutes, etc.) (⚠️)
 - Polls (can contain multiple different choices, are anonymous, and use Discord's option buttons) (❌)
 - Leveling (with support for role rewards, and that is for free!) (❌)
 - Reaction roles (highly customizable, can be used for verification systems etc.) (❌)
