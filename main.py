@@ -73,16 +73,31 @@ tree = app_commands.CommandTree(client)
 async def test(interaction : discord.Interaction, member : discord.Member):
     await interaction.response.send_message(f"aaaaaaaaa <@!{member.id}>")
 
-if config_json["moderation_module_enabled"]:
+if config_json["moderation_module_enabled"] and config_json["moderation_module_ban_enabled"]:
     @tree.command(name="ban", description="Bans a user", guild=discord.Object(1126581141642674267))
-    async def ban(interaction : discord.Interaction, member : discord.Member):
+    async def ban_cmd(interaction : discord.Interaction, member : discord.Member):
         bot = await interaction.guild.fetch_member(client.user.id)
-        if member.top_role < bot.top_role:
-            await member.ban()
-            await member.send("You got banned lmfaoaoaoao")
-            await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
+        if interaction.permissions.ban_members:
+            if member.top_role < bot.top_role and member.guild.owner.id != member.id:
+                await member.ban()
+                await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
+            else:
+                await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
         else:
-            await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
+            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
+
+if config_json["moderation_module_enabled"] and config_json["moderation_module_ban_from_context_menu_enabled"]:
+    @tree.context_menu(name="Ban", guild=discord.Object(1126581141642674267))
+    async def ban_ctxt(interaction : discord.Interaction, member : discord.Member):
+        bot = await interaction.guild.fetch_member(client.user.id)
+        if interaction.permissions.ban_members:
+            if member.top_role < bot.top_role and member.guild.owner.id != member.id:
+                await member.ban()
+                await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
+            else:
+                await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
+        else:
+            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 
 client.run(loaded_token)

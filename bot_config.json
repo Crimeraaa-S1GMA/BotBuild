@@ -9,5 +9,7 @@
   "welcome_module_join_role_ids" : [1129473421701546035],
   "welcome_module_join_channel" : 1129473586739036423,
   "welcome_module_leave_channel" : 1129473586739036423,
-  "moderation_module_enabled" : true
+  "moderation_module_enabled" : true,
+  "moderation_module_ban_enabled" : true,
+  "moderation_module_ban_from_context_menu_enabled" : true
 }
