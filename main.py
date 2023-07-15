@@ -68,11 +68,6 @@ intents.reactions = True
 
 bot = BotBuildClient(intents=intents, command_prefix="/")
 
-    
-@bot.command(name="test", description="This is a test command", guild=discord.Object(1126581141642674267))
-async def test(interaction : discord.Interaction, member : discord.Member):
-    await interaction.response.send_message(f"aaaaaaaaa <@!{member.id}>")
-
 if config_json["moderation_module_enabled"] and config_json["moderation_module_ban_enabled"]:
     @bot.tree.command(name="ban", description="Bans a user", guild=discord.Object(1126581141642674267))
     @app_commands.describe(reason="The reason you're banning the user for")
