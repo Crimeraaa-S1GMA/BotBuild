@@ -17,7 +17,7 @@ class BotBuildClient(discord.ext.commands.Bot):
         await channels[0].send("@everyone WELLCUM")
 
     async def on_message(self, message):
-        if message.author == client.user:
+        if message.author == bot.user:
             return
         
         found_sus = False
