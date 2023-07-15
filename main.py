@@ -1,14 +1,15 @@
 import discord
 import json
 from discord import app_commands
+from discord.ext.commands import Bot
 
 sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta"]
 
-class BotBuildClient(discord.Client):
+class BotBuildClient(discord.ext.commands.Bot):
     async def on_ready(self):
         activity = discord.Activity(name="Made with BotBuild", type=discord.ActivityType.watching)
-        await client.change_presence(status=discord.Status.do_not_disturb, activity=activity)
-        await tree.sync(guild=discord.Object(id=1126581141642674267))
+        await bot.change_presence(status=discord.Status.do_not_disturb, activity=activity)
+        await bot.tree.sync(guild=discord.Object(id=1126581141642674267))
         print(f'Logged on as {self.user.name}!')
 
     async def on_guild_join(self, guild):
@@ -65,21 +66,20 @@ intents.members = True
 intents.guilds = True
 intents.reactions = True
 
-client = BotBuildClient(intents=intents)
-tree = app_commands.CommandTree(client)
+bot = BotBuildClient(intents=intents, command_prefix="/")
 
     
-@tree.command(name="test", description="This is a test command", guild=discord.Object(1126581141642674267))
+@bot.command(name="test", description="This is a test command", guild=discord.Object(1126581141642674267))
 async def test(interaction : discord.Interaction, member : discord.Member):
     await interaction.response.send_message(f"aaaaaaaaa <@!{member.id}>")
 
 if config_json["moderation_module_enabled"] and config_json["moderation_module_ban_enabled"]:
-    @tree.command(name="ban", description="Bans a user", guild=discord.Object(1126581141642674267))
+    @bot.tree.command(name="ban", description="Bans a user", guild=discord.Object(1126581141642674267))
     @app_commands.describe(reason="The reason you're banning the user for")
     async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
-        bot = await interaction.guild.fetch_member(client.user.id)
+        bot_member = await interaction.guild.fetch_member(bot.user.id)
         if interaction.permissions.ban_members:
-            if member.top_role < bot.top_role and member.guild.owner.id != member.id:
+            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
                 await member.ban(reason=reason)
                 await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
             else:
@@ -88,11 +88,11 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_b
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 if config_json["moderation_module_enabled"] and config_json["moderation_module_ban_from_context_menu_enabled"]:
-    @tree.context_menu(name="Ban", guild=discord.Object(1126581141642674267))
+    @bot.tree.context_menu(name="Ban", guild=discord.Object(1126581141642674267))
     async def ban_ctxt(interaction : discord.Interaction, member : discord.Member):
-        bot = await interaction.guild.fetch_member(client.user.id)
+        bot_member = await interaction.guild.fetch_member(bot.user.id)
         if interaction.permissions.ban_members:
-            if member.top_role < bot.top_role and member.guild.owner.id != member.id:
+            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
                 await member.ban()
                 await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
             else:
@@ -101,12 +101,12 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_b
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 if config_json["moderation_module_enabled"] and config_json["moderation_module_kick_enabled"]:
-    @tree.command(name="kick", description="Kicks a user out of the server", guild=discord.Object(1126581141642674267))
+    @bot.tree.command(name="kick", description="Kicks a user out of the server", guild=discord.Object(1126581141642674267))
     @app_commands.describe(reason="The reason you're kicking the user out for")
     async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
-        bot = await interaction.guild.fetch_member(client.user.id)
+        bot_member = await interaction.guild.fetch_member(bot.user.id)
         if interaction.permissions.kick_members:
-            if member.top_role < bot.top_role and member.guild.owner.id != member.id:
+            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
                 await member.kick(reason=reason)
                 await interaction.response.send_message(f"Kicked **{member.name}** out", ephemeral=True)
             else:
@@ -115,11 +115,11 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_k
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 if config_json["moderation_module_enabled"] and config_json["moderation_module_kick_from_context_menu_enabled"]:
-    @tree.context_menu(name="Kick", guild=discord.Object(1126581141642674267))
+    @bot.tree.context_menu(name="Kick", guild=discord.Object(1126581141642674267))
     async def kick_ctxt(interaction : discord.Interaction, member : discord.Member):
-        bot = await interaction.guild.fetch_member(client.user.id)
+        bot_member = await interaction.guild.fetch_member(bot.user.id)
         if interaction.permissions.kick_members:
-            if member.top_role < bot.top_role and member.guild.owner.id != member.id:
+            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
                 await member.kick()
                 await interaction.response.send_message(f"Kicked **{member.name}** out", ephemeral=True)
             else:
@@ -128,4 +128,4 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_k
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 
-client.run(loaded_token)
+bot.run(loaded_token)
