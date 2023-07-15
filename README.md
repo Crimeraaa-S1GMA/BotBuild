@@ -17,7 +17,7 @@ As of right now, nothing listed here is properly implemented. Those are all plan
 BotBuild will support many modules which can be turned on or off depending on your needs, and you can also disable commands which you do not need.
 
 Here is a list of some planned modules:
-- Moderation (bans, mutes, etc.) (❌)
+- Moderation (bans, mutes, etc.) (⚠️)
 - Polls (can contain multiple different choices, are anonymous, and use Discord's option buttons) (❌)
 - Leveling (with support for role rewards, and that is for free!) (❌)
 - Reaction roles (highly customizable, can be used for verification systems etc.) (❌)
