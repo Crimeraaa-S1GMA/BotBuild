@@ -59,7 +59,7 @@ loaded_token = token_file.read()
 
 token_file.close()
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.message_content = True
 intents.members = True
 intents.guilds = True
@@ -71,12 +71,18 @@ tree = app_commands.CommandTree(client)
     
 @tree.command(name="test", description="This is a test command", guild=discord.Object(1126581141642674267))
 async def test(interaction : discord.Interaction, member : discord.Member):
-    await interaction.response.send_message("aaaaaaaaa")
+    await interaction.response.send_message(f"aaaaaaaaa <@!{member.id}>")
 
-# Crappy test command
-# @tree.command(name="balls", description="Test command", guild=discord.Object(id=1081978875178909787))
-# async def first_command(interaction):
-#    await interaction.response.send_message("Biggest balls of the summer\nIf you ain't cumming that's a bummer")
+if config_json["moderation_module_enabled"]:
+    @tree.command(name="ban", description="Bans a user", guild=discord.Object(1126581141642674267))
+    async def ban(interaction : discord.Interaction, member : discord.Member):
+        bot = await interaction.guild.fetch_member(client.user.id)
+        if member.top_role < bot.top_role:
+            await member.ban()
+            await member.send("You got banned lmfaoaoaoao")
+            await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
+        else:
+            await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
 
 
 client.run(loaded_token)

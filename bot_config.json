@@ -8,5 +8,6 @@
   "welcome_module_incl_bots_leave" : false,
   "welcome_module_join_role_ids" : [1129473421701546035],
   "welcome_module_join_channel" : 1129473586739036423,
-  "welcome_module_leave_channel" : 1129473586739036423
+  "welcome_module_leave_channel" : 1129473586739036423,
+  "moderation_module_enabled" : true
 }
