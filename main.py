@@ -122,5 +122,13 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_k
         else:
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
+if config_json["moderation_module_enabled"] and config_json["moderation_module_dmsend_enabled"]:
+    @bot.tree.command(name="dmsend", description="DM sending test", guild=discord.Object(1126581141642674267))
+    async def dmsend_cmd(interaction : discord.Interaction, member : discord.Member, message : str):
+        embed = discord.Embed(title=f"Message from {interaction.guild.name}!", description=message)
+        embed.set_author(name=f"{interaction.user.name}", url=None, icon_url=interaction.user.avatar.url)
+        await member.send(embed=embed)
+        await interaction.response.send_message("Sent!", ephemeral=True)
+
 
 bot.run(loaded_token)
