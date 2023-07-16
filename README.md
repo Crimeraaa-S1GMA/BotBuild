@@ -23,8 +23,8 @@ Here is a list of some planned modules:
 - Reaction roles (highly customizable, can be used for verification systems etc.) (❌)
 - Server statistics (messages sent, non-bot members who joined) (❌)
 - Welcome/Farewell messages (can be customized to your heart's content, and used in any channel you want) (⚠️)
-- Logging (informs the admins about any moderation actions that have been performed in the guild) (❌)
-- Channel setup (meme channel allows only messages with media and adds reactions, suggestion channel converts messages into suggestions, and allows voting) (❌)
+- Logging (informs the admins about any moderation actions that have been performed in the server) (❌)
+- Channel setup (meme channel allows only messages with media and adds reactions, suggestion channel converts messages into suggestions, and allows voting) (⚠️)
 - Games (canvas like r/place, server economy, etc.) (❌)
 - Giveaways (chooses a random winner, can check for conditions such as having sent enough messages, being in the server for long enough etc.) (❌)
 - Utilities (a shit ton of commands which perform various functions, but do not fit into any of the other categories) (❌)
@@ -34,7 +34,7 @@ Here is a list of some planned modules:
 ### Status
 ✔️ - Implemented as stable
 
-⚠️ - Implemented as unstable/experimental (Turned off by default, can experience bugs, crashes)
+⚠️ - Implemented as unstable/experimental (Turned off by default, can experience bugs, crashes, are a work-in-progress)
 
 ❌ - Not implemented
 
