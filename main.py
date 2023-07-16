@@ -7,7 +7,7 @@ from discord.ext.commands import Bot
 from discord.utils import MISSING
 import config_access
 
-sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta"]
+sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta", "lie", "liar", "electrical", "among"]
 
 class SendMessage(discord.ui.Modal, title='Send Message'):
     user_id = 0
@@ -84,7 +84,7 @@ intents.reactions = True
 bot = BotBuildClient(intents=intents, command_prefix="/")
 
 if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_ban_enabled"):
-    @bot.tree.command(name="ban", description="Bans a user", guild=discord.Object(1126581141642674267))
+    @bot.tree.command(name="ban", description="Bans a user", guilds=config_access.server_list())
     @app_commands.describe(reason="The reason you're banning the user for")
     async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
         bot_member = await interaction.guild.fetch_member(bot.user.id)
@@ -98,7 +98,7 @@ if config_access.return_config_value("moderation_module_enabled") and config_acc
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_ban_from_context_menu_enabled"):
-    @bot.tree.context_menu(name="Ban", guild=discord.Object(1126581141642674267))
+    @bot.tree.context_menu(name="Ban", guilds=config_access.server_list())
     async def ban_ctxt(interaction : discord.Interaction, member : discord.Member):
         bot_member = await interaction.guild.fetch_member(bot.user.id)
         if interaction.permissions.ban_members:
@@ -111,7 +111,7 @@ if config_access.return_config_value("moderation_module_enabled") and config_acc
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_kick_enabled"):
-    @bot.tree.command(name="kick", description="Kicks a user out of the server", guild=discord.Object(1126581141642674267))
+    @bot.tree.command(name="kick", description="Kicks a user out of the server", guilds=config_access.server_list())
     @app_commands.describe(reason="The reason you're kicking the user out for")
     async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
         bot_member = await interaction.guild.fetch_member(bot.user.id)
@@ -125,7 +125,7 @@ if config_access.return_config_value("moderation_module_enabled") and config_acc
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_kick_from_context_menu_enabled"):
-    @bot.tree.context_menu(name="Kick", guild=discord.Object(1126581141642674267))
+    @bot.tree.context_menu(name="Kick", guilds=config_access.server_list())
     async def kick_ctxt(interaction : discord.Interaction, member : discord.Member):
         bot_member = await interaction.guild.fetch_member(bot.user.id)
         if interaction.permissions.kick_members:
@@ -138,7 +138,8 @@ if config_access.return_config_value("moderation_module_enabled") and config_acc
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
 if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_dmsend_enabled"):
-    @bot.tree.command(name="dmsend", description="DM sending test", guild=discord.Object(1126581141642674267))
+    @bot.tree.command(name="message", description="Sends a fancy message to a selected user", guilds=config_access.server_list())
+    @app_commands.describe(member="The server member to send the message to", message="The content of the message you want to send")
     async def dmsend_cmd(interaction : discord.Interaction, member : discord.Member, message : str):
         try:
             embed = discord.Embed(title=f"Message from {interaction.guild.name}!", description=message)
@@ -149,7 +150,7 @@ if config_access.return_config_value("moderation_module_enabled") and config_acc
             await interaction.response.send_message("Sending message failed!", ephemeral=True)
 
 if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_dmsend_enabled"):
-    @bot.tree.context_menu(name="Message", guild=discord.Object(1126581141642674267))
+    @bot.tree.context_menu(name="Message", guilds=config_access.server_list())
     async def dmsend_ctxt(interaction : discord.Interaction, member : discord.Member):
         modal = SendMessage()
         modal.user_id = member.id
