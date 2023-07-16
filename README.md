@@ -46,7 +46,7 @@ As mentioned before, the components used can be toggled on or off, and using the
 # Dependencies
 This list may be expanded in the future, as the tool is still in a planning stage, and I haven't decided which modules to use yet.
 
-- tkinter (for GUI dashboard, optional)
+- Flask (used to host the dashboard)
 - discord.py (for bot backend)
 
 # Limitations
