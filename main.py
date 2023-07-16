@@ -1,10 +1,8 @@
-from typing import Optional
 import discord
 import discord.ui
-import json
 from discord import app_commands
-from discord.ext.commands import Bot
-from discord.utils import MISSING
+from discord.ext.commands import bot
+import asyncio
 import config_access
 
 sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta", "lie", "liar", "electrical", "among"]
