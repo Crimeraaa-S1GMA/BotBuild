@@ -1,10 +1,27 @@
+from typing import Optional
 import discord
+import discord.ui
 import json
 from discord import app_commands
 from discord.ext.commands import Bot
+from discord.utils import MISSING
 import config_access
 
 sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta"]
+
+class SendMessage(discord.ui.Modal, title='Send Message'):
+    user_id = 0
+    answer = discord.ui.TextInput(label='Message', style=discord.TextStyle.paragraph)
+
+    async def on_submit(self, interaction: discord.Interaction):
+        try:
+            user = interaction.client.get_user(self.user_id)
+            embed = discord.Embed(title=f"Message from {interaction.guild.name}!", description=self.answer)
+            embed.set_author(name=f"{interaction.user.name}", url=None, icon_url=interaction.user.avatar.url)
+            await user.send(embed=embed)
+            await interaction.response.send_message("Sent!", ephemeral=True)
+        except Exception as e:
+            await interaction.response.send_message("Sending message failed!", ephemeral=True)
 
 class BotBuildClient(discord.ext.commands.Bot):
     async def on_ready(self):
@@ -130,6 +147,14 @@ if config_access.return_config_value("moderation_module_enabled") and config_acc
             await interaction.response.send_message("Sent!", ephemeral=True)
         except:
             await interaction.response.send_message("Sending message failed!", ephemeral=True)
+
+if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_dmsend_enabled"):
+    @bot.tree.context_menu(name="Message", guild=discord.Object(1126581141642674267))
+    async def dmsend_ctxt(interaction : discord.Interaction, member : discord.Member):
+        modal = SendMessage()
+        modal.user_id = member.id
+        await interaction.response.send_modal(modal)
+
 
 
 bot.run(loaded_token)
