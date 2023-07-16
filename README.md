@@ -22,7 +22,7 @@ Here is a list of some planned modules:
 - Leveling (with support for role rewards, and that is for free!) (❌)
 - Reaction roles (highly customizable, can be used for verification systems etc.) (❌)
 - Server statistics (messages sent, non-bot members who joined) (❌)
-- Welcome/Farewell messages (can be customized to your heart's content, and used in any channel you want) (❌)
+- Welcome/Farewell messages (can be customized to your heart's content, and used in any channel you want) (⚠️)
 - Logging (informs the admins about any moderation actions that have been performed in the guild) (❌)
 - Channel setup (meme channel allows only messages with media and adds reactions, suggestion channel converts messages into suggestions, and allows voting) (❌)
 - Games (canvas like r/place, server economy, etc.) (❌)
@@ -34,7 +34,7 @@ Here is a list of some planned modules:
 ### Status
 ✔️ - Implemented as stable
 
-⚠️ - Implemented as unstable/experimental (Turned off by default)
+⚠️ - Implemented as unstable/experimental (Turned off by default, can experience bugs, crashes)
 
 ❌ - Not implemented
 
