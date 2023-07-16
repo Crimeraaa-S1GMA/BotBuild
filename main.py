@@ -69,7 +69,7 @@ class BotBuildClient(discord.ext.commands.AutoShardedBot):
                 channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel"))
 
                 embed = discord.Embed(title="Featured Message", description=message.content)
-                embed.set_author(name=f"{message.author.name}", url=None, icon_url=message.author.avatar.url)
+                embed.set_author(name=f"{message.author.name}", url=None, icon_url=message.author.avatar.url if message.author.avatar is not None else None)
                 if len(message.attachments) > 0:
                     if message.attachments[0].content_type.startswith("image"):
                         embed.set_image(url=message.attachments[0].url)
