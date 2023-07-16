@@ -26,8 +26,12 @@ class BotBuildClient(discord.ext.commands.AutoShardedBot):
     async def on_ready(self):
         activity = discord.Activity(name="Made with BotBuild", type=discord.ActivityType.watching)
         await bot.change_presence(status=discord.Status.online, activity=activity)
-        print(f'Logged on as {self.user.name}!')
+        print("Welcome to BotBuild!")
+        print("__________________________\n")
+        print(f'Account: {self.user.name}!')
         
+        print("__________________________\n")
+        print("Initializing cogs...")
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_ban_enabled"):
             @bot.tree.command(name="ban", description="Bans a user", guilds=config_access.server_list(bot.guilds))
             @app_commands.describe(reason="The reason you're banning the user for")
@@ -83,7 +87,8 @@ class BotBuildClient(discord.ext.commands.AutoShardedBot):
         
         for server in config_access.server_list(self.guilds):
             await self.tree.sync(guild=server)
-        print("Done!")
+        print("__________________________\n")
+        print("Ready!")
 
     async def on_guild_join(self, guild):
         channels = guild.text_channels
