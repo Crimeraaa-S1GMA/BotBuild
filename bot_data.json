@@ -1,0 +1,11 @@
+{
+    "polls" : {
+        "0" : {
+            "choice1Users" : [],
+            "choice2Users" : [],
+            "choice3Users" : [],
+            "choice4Users" : [],
+            "choice5Users" : []
+        }
+    }
+}

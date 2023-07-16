@@ -21,7 +21,8 @@ class BotBuildClient(commands.AutoShardedBot):
         print("__________________________\n")
         print("Initializing cogs...")
         
-        await bot.add_cog(moderation.Moderation(self))
+        if config_access.return_config_value("moderation_module_enabled"):
+            await bot.add_cog(moderation.Moderation(self))
         for server in config_access.server_list(self.guilds):
             await self.tree.sync(guild=server)
         print("__________________________\n")
