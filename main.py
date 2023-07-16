@@ -2,6 +2,7 @@ import discord
 import json
 from discord import app_commands
 from discord.ext.commands import Bot
+import config_access
 
 sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta"]
 
@@ -20,40 +21,37 @@ class BotBuildClient(discord.ext.commands.Bot):
         if message.author == bot.user:
             return
         
-        found_sus = False
+        if config_access.return_config_value("sus_mode_easter_egg") and (len(config_access.return_config_value("sus_mode_channels")) < 1 or message.channel.id in config_access.return_config_value("sus_mode_channels")):
+            found_sus = False
 
-        for word in sussy_words:
-            if word in message.content.lower().replace(" ", "").replace("\n", ""):
-                found_sus = True
-        
-        if found_sus:
-            await message.add_reaction("🤨")
-            await message.add_reaction("🇸")
-            await message.add_reaction("🇺")
-            await message.add_reaction("5️⃣")
-            await message.channel.send("SUS! :face_with_raised_eyebrow:")
+            for word in sussy_words:
+                if word in message.content.lower().replace(" ", "").replace("\n", ""):
+                    found_sus = True
+            
+            if found_sus:
+                await message.add_reaction("🤨")
+                await message.add_reaction("🇸")
+                await message.add_reaction("🇺")
+                await message.add_reaction("5️⃣")
+                await message.channel.send("SUS! :face_with_raised_eyebrow:")
 
     async def on_member_join(self, member):
-        if config_json["welcome_module_enabled"] and config_json["welcome_module_user_join_enabled"] \
-                and member.guild == bot.get_channel(config_json["welcome_module_join_channel"]).guild:
-            channel = bot.get_channel(config_json["welcome_module_join_channel"])
-            await channel.send(config_json["welcome_module_user_join_message"].format(member_mention=member.mention))
+        if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_join_enabled") \
+                and member.guild == bot.get_channel(config_access.return_config_value("welcome_module_join_channel")).guild:
+            channel = bot.get_channel(config_access.return_config_value("welcome_module_join_channel"))
+            await channel.send(config_access.return_config_value("welcome_module_join_message").format(member_mention=member.mention))
             guild = member.guild
-            for role_id in config_json["welcome_module_join_role_ids"]:
+            for role_id in config_access.return_config_value("welcome_module_join_role_ids"):
                 role = guild.get_role(role_id)
                 await member.add_roles(role)
 
     async def on_member_remove(self, member):
-        if config_json["welcome_module_enabled"] and config_json["welcome_module_user_leave_enabled"] \
-                and member.guild == bot.get_channel(config_json["welcome_module_leave_channel"]).guild:
-            channel = bot.get_channel(config_json["welcome_module_leave_channel"])
-            await channel.send(config_json["welcome_module_user_leave_message"].format(member_mention=member.mention))
+        if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_leave_enabled") \
+                and member.guild == bot.get_channel(config_access.return_config_value("welcome_module_leave_channel")).guild:
+            channel = bot.get_channel(config_access.return_config_value("welcome_module_leave_channel"))
+            await channel.send(config_access.return_config_value("welcome_module_leave_message").format(member_mention=member.mention))
 
 
-config_file = open("bot_config.json", "r")
-config_json = json.loads(config_file.read())
-
-config_file.close()
 
 token_file = open("token.txt", "r")
 loaded_token = token_file.read()
@@ -68,7 +66,7 @@ intents.reactions = True
 
 bot = BotBuildClient(intents=intents, command_prefix="/")
 
-if config_json["moderation_module_enabled"] and config_json["moderation_module_ban_enabled"]:
+if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_ban_enabled"):
     @bot.tree.command(name="ban", description="Bans a user", guild=discord.Object(1126581141642674267))
     @app_commands.describe(reason="The reason you're banning the user for")
     async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
@@ -82,7 +80,7 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_b
         else:
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
-if config_json["moderation_module_enabled"] and config_json["moderation_module_ban_from_context_menu_enabled"]:
+if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_ban_from_context_menu_enabled"):
     @bot.tree.context_menu(name="Ban", guild=discord.Object(1126581141642674267))
     async def ban_ctxt(interaction : discord.Interaction, member : discord.Member):
         bot_member = await interaction.guild.fetch_member(bot.user.id)
@@ -95,7 +93,7 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_b
         else:
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
-if config_json["moderation_module_enabled"] and config_json["moderation_module_kick_enabled"]:
+if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_kick_enabled"):
     @bot.tree.command(name="kick", description="Kicks a user out of the server", guild=discord.Object(1126581141642674267))
     @app_commands.describe(reason="The reason you're kicking the user out for")
     async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
@@ -109,7 +107,7 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_k
         else:
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
-if config_json["moderation_module_enabled"] and config_json["moderation_module_kick_from_context_menu_enabled"]:
+if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_kick_from_context_menu_enabled"):
     @bot.tree.context_menu(name="Kick", guild=discord.Object(1126581141642674267))
     async def kick_ctxt(interaction : discord.Interaction, member : discord.Member):
         bot_member = await interaction.guild.fetch_member(bot.user.id)
@@ -122,13 +120,16 @@ if config_json["moderation_module_enabled"] and config_json["moderation_module_k
         else:
             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
-if config_json["moderation_module_enabled"] and config_json["moderation_module_dmsend_enabled"]:
+if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_dmsend_enabled"):
     @bot.tree.command(name="dmsend", description="DM sending test", guild=discord.Object(1126581141642674267))
     async def dmsend_cmd(interaction : discord.Interaction, member : discord.Member, message : str):
-        embed = discord.Embed(title=f"Message from {interaction.guild.name}!", description=message)
-        embed.set_author(name=f"{interaction.user.name}", url=None, icon_url=interaction.user.avatar.url)
-        await member.send(embed=embed)
-        await interaction.response.send_message("Sent!", ephemeral=True)
+        try:
+            embed = discord.Embed(title=f"Message from {interaction.guild.name}!", description=message)
+            embed.set_author(name=f"{interaction.user.name}", url=None, icon_url=interaction.user.avatar.url)
+            await member.send(embed=embed)
+            await interaction.response.send_message("Sent!", ephemeral=True)
+        except:
+            await interaction.response.send_message("Sending message failed!", ephemeral=True)
 
 
 bot.run(loaded_token)

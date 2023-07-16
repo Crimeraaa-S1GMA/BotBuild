@@ -1,4 +1,6 @@
 {
+  "sus_mode_easter_egg" : false,
+  "sus_mode_channels" : [],
   "welcome_module_enabled" : true,
   "welcome_module_user_join_enabled" : true,
   "welcome_module_user_leave_enabled" : true,
