@@ -172,6 +172,22 @@ if config_access.return_config_value("moderation_module_enabled") and config_acc
         modal.user_id = member.id
         await interaction.response.send_modal(modal)
 
+if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_feature_enabled"):
+    @bot.tree.context_menu(name="Feature Message", guilds=config_access.server_list())
+    async def featuremsg_ctxt(interaction : discord.Interaction, message : discord.Message):
+        channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel"))
 
+        embed = discord.Embed(title="Featured Message", description=message.content)
+        embed.set_author(name=f"{message.author.name}", url=None, icon_url=message.author.avatar.url)
+        if len(message.attachments) > 0:
+            if message.attachments[0].content_type.startswith("image"):
+                embed.set_image(url=message.attachments[0].url)
+
+        view = discord.ui.View()
+
+        view.add_item(discord.ui.Button(label="Jump to message", url=message.jump_url))
+
+        await channel.send(embed=embed, view=view)
+        await interaction.response.send_message("Featured!", ephemeral=True)
 
 bot.run(loaded_token)
