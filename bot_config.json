@@ -17,5 +17,7 @@
   "moderation_module_ban_from_context_menu_enabled" : true,
   "moderation_module_kick_enabled" : true,
   "moderation_module_kick_from_context_menu_enabled" : true,
-  "moderation_module_dmsend_enabled" : true
+  "moderation_module_dmsend_enabled" : true,
+  "meme_channel_module_enabled" : true,
+  "meme_channel" : 1130132288601067531
 }

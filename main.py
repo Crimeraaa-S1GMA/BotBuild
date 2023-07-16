@@ -23,10 +23,10 @@ class SendMessage(discord.ui.Modal, title='Send Message'):
         except Exception as e:
             await interaction.response.send_message("Sending message failed!", ephemeral=True)
 
-class BotBuildClient(discord.ext.commands.Bot):
+class BotBuildClient(discord.ext.commands.AutoShardedBot):
     async def on_ready(self):
         activity = discord.Activity(name="Made with BotBuild", type=discord.ActivityType.watching)
-        await bot.change_presence(status=discord.Status.do_not_disturb, activity=activity)
+        await bot.change_presence(status=discord.Status.online, activity=activity)
         await bot.tree.sync(guild=discord.Object(id=1126581141642674267))
         print(f'Logged on as {self.user.name}!')
 
@@ -38,6 +38,22 @@ class BotBuildClient(discord.ext.commands.Bot):
         if message.author == bot.user:
             return
         
+        if config_access.return_config_value("meme_channel_module_enabled") and message.channel.id == config_access.return_config_value("meme_channel"):
+            if len(message.attachments) > 0:
+                is_memes = True
+
+                for att in message.attachments:
+                    if not att.content_type.startswith("image") and not att.content_type.startswith("video"):
+                        is_memes = False
+
+                if is_memes:
+                    await message.add_reaction("👍")
+                    await message.add_reaction("👎")
+                else:
+                    await message.delete()
+            else:
+                await message.delete()
+
         if config_access.return_config_value("sus_mode_easter_egg") and (len(config_access.return_config_value("sus_mode_channels")) < 1 or message.channel.id in config_access.return_config_value("sus_mode_channels")):
             found_sus = False
 
