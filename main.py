@@ -27,10 +27,6 @@ class BotBuildClient(commands.AutoShardedBot):
         print("__________________________\n")
         print("Ready!")
 
-    async def on_guild_join(self, guild):
-        channels = guild.text_channels
-        await channels[0].send("@everyone WELLCUM")
-
     async def on_message(self, message):
         if message.author == bot.user:
             return

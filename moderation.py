@@ -75,6 +75,8 @@ class Moderation(commands.Cog):
 
                 await channel.send(embed=embed, view=view)
                 await interaction.response.send_message("Featured!", ephemeral=True)
+        
+        print("Initialized moderation cog...")
     
     @commands.command()
     async def ping(self, ctx):
