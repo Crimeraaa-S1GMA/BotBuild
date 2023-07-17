@@ -18,5 +18,6 @@
   "moderation_module_feature_enabled" : true,
   "moderation_module_feature_channel" : 1130138048487755856,
   "meme_channel_module_enabled" : true,
-  "meme_channel" : 1130132288601067531
+  "meme_channel" : 1130132288601067531,
+  "polls_module_enabled" : true
 }

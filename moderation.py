@@ -78,6 +78,6 @@ class Moderation(commands.Cog):
         
         print("Initialized moderation cog...")
     
-    @commands.command()
+    @commands.hybrid_command()
     async def ping(self, ctx):
         await ctx.send("aaaaaa")

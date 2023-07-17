@@ -7,8 +7,8 @@ import threading
 import config_access
 
 import moderation
-
-sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta", "lie", "liar", "electrical", "among"]
+import memechannel
+import susmode
 
 class BotBuildClient(commands.AutoShardedBot):
     async def on_ready(self):
@@ -23,45 +23,14 @@ class BotBuildClient(commands.AutoShardedBot):
         
         if config_access.return_config_value("moderation_module_enabled"):
             await bot.add_cog(moderation.Moderation(self))
+        if config_access.return_config_value("meme_channel_module_enabled"):
+            await bot.add_cog(memechannel.MemeChannel(self))
+        if config_access.return_config_value("sus_mode_easter_egg"):
+            await bot.add_cog(susmode.SusMode(self))
         for server in config_access.server_list(self.guilds):
             await self.tree.sync(guild=server)
         print("__________________________\n")
         print("Ready!")
-
-    async def on_message(self, message):
-        if message.author == bot.user:
-            return
-        
-        if config_access.return_config_value("meme_channel_module_enabled") and message.channel.id == config_access.return_config_value("meme_channel"):
-            if len(message.attachments) > 0:
-                is_memes = True
-
-                for att in message.attachments:
-                    if not att.content_type.startswith("image") and not att.content_type.startswith("video"):
-                        is_memes = False
-
-                if is_memes:
-                    await message.add_reaction("👍")
-                    await message.add_reaction("👎")
-                else:
-                    await message.delete()
-            else:
-                await message.delete()
-
-        if config_access.return_config_value("sus_mode_easter_egg") and (len(config_access.return_config_value("sus_mode_channels")) < 1 or message.channel.id in config_access.return_config_value("sus_mode_channels")):
-            found_sus = False
-
-            for word in sussy_words:
-                if word in message.content.lower().replace(" ", "").replace("\n", ""):
-                    found_sus = True
-            
-            if found_sus:
-                await message.add_reaction("🤨")
-                await message.add_reaction("🇸")
-                await message.add_reaction("🇺")
-                await message.add_reaction("5️⃣")
-                await message.channel.send("SUS! :face_with_raised_eyebrow:")
-        await self.process_commands(message)
 
     async def on_member_join(self, member):
         if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_join_enabled") \
