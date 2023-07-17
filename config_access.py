@@ -9,11 +9,3 @@ def return_config_value(value):
     config_file.close()
 
     return config_json[value]
-
-def server_list(guilds):
-    server_ids = []
-
-    for guild in guilds:
-        server_ids.append(discord.Object(guild.id))
-    
-    return server_ids
