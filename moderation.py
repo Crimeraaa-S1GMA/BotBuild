@@ -24,7 +24,7 @@ class Moderation(commands.Cog):
         self.bot = bot
         self._last_member = None
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_ban_enabled"):
-            @bot.tree.command(name="ban", description="Bans a user", guilds=config_access.server_list(bot.guilds))
+            @bot.tree.command(name="ban", description="Bans a user")
             @app_commands.describe(reason="The reason you're banning the user for")
             async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
                 bot_member = await interaction.guild.fetch_member(bot.user.id)
@@ -38,7 +38,7 @@ class Moderation(commands.Cog):
                     await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_kick_enabled"):
-            @bot.tree.command(name="kick", description="Kicks a user out of the server", guilds=config_access.server_list(bot.guilds))
+            @bot.tree.command(name="kick", description="Kicks a user out of the server")
             @app_commands.describe(reason="The reason you're kicking the user out for")
             async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
                 bot_member = await interaction.guild.fetch_member(bot.user.id)
@@ -52,14 +52,14 @@ class Moderation(commands.Cog):
                     await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_dmsend_enabled"):
-            @bot.tree.context_menu(name="Message", guilds=config_access.server_list(bot.guilds))
+            @bot.tree.context_menu(name="Message")
             async def dmsend_ctxt(interaction : discord.Interaction, member : discord.Member):
                 modal = SendMessage()
                 modal.user_id = member.id
                 await interaction.response.send_modal(modal)
 
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_feature_enabled"):
-            @bot.tree.context_menu(name="Feature Message", guilds=config_access.server_list(bot.guilds))
+            @bot.tree.context_menu(name="Feature Message")
             async def featuremsg_ctxt(interaction : discord.Interaction, message : discord.Message):
                 channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel"))
 

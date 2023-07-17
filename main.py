@@ -23,10 +23,13 @@ class BotBuildClient(commands.AutoShardedBot):
         
         if config_access.return_config_value("moderation_module_enabled"):
             await bot.add_cog(moderation.Moderation(self))
+        
         if config_access.return_config_value("meme_channel_module_enabled"):
             await bot.add_cog(memechannel.MemeChannel(self))
+        
         if config_access.return_config_value("sus_mode_easter_egg"):
             await bot.add_cog(susmode.SusMode(self))
+        
         for server in config_access.server_list(self.guilds):
             await self.tree.sync(guild=server)
         print("__________________________\n")
@@ -56,10 +59,6 @@ loaded_token = token_file.read()
 token_file.close()
 
 intents = discord.Intents.all()
-intents.message_content = True
-intents.members = True
-intents.guilds = True
-intents.reactions = True
 
 bot = BotBuildClient(intents=intents, command_prefix="!")
 
