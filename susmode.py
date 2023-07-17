@@ -10,7 +10,6 @@ sussy_words = ["amogus", "sus", "vent", "sugoma", "imposter", "impasta", "lie", 
 class SusMode(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self._last_member = None
         print("Initialized sus mode cog...")
     
     @commands.Cog.listener()

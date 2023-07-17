@@ -8,7 +8,6 @@ import config_access
 class Debug(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self._last_member = None
         print("Initialized debug cog...")
     
     @commands.command()

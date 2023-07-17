@@ -25,71 +25,71 @@ class SendMessage(discord.ui.Modal, title='Send Message'):
 class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self._last_member = None
+        @app_commands.command(name="ban", description="Bans a user")
+        @app_commands.describe(reason="The reason you're banning the user for")
+        @app_commands.guild_only()
+        @app_commands.default_permissions(ban_members=True)
+        async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
+            bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
+            if interaction.permissions.ban_members:
+                if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
+                    await member.ban(reason=reason)
+                    await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
+                else:
+                    await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
+            else:
+                await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
+
+        @app_commands.command(name="kick", description="Kicks a user out of the server")
+        @app_commands.describe(reason="The reason you're kicking the user out for")
+        @app_commands.guild_only()
+        @app_commands.default_permissions(kick_members=True)
+        async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
+            bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
+            if interaction.permissions.kick_members:
+                if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
+                    await member.kick(reason=reason)
+                    await interaction.response.send_message(f"Kicked **{member.name}** out", ephemeral=True)
+                else:
+                    await interaction.response.send_message(f"Could not kick **{member.name}** out due to role hierarchy", ephemeral=True)
+            else:
+                await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
+
+        @app_commands.context_menu(name="Message")
+        @app_commands.guild_only()
+        @app_commands.default_permissions(manage_guild=True)
+        async def dmsend_ctxt(interaction : discord.Interaction, member : discord.Member):
+            if interaction.permissions.manage_guild:
+                modal = SendMessage()
+                modal.user_id = member.id
+                await interaction.response.send_modal(modal)
+            else:
+                await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
+
+        @app_commands.context_menu(name="Feature Message")
+        @app_commands.guild_only()
+        @app_commands.default_permissions(manage_messages=True)
+        async def featuremsg_ctxt(interaction : discord.Interaction, message : discord.Message):
+            if interaction.permissions.manage_messages:
+                channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel"))
+
+                embed = discord.Embed(title="Featured Message", description=message.content)
+                embed.set_author(name=f"{message.author.name}", url=None, icon_url=message.author.avatar.url if message.author.avatar is not None else None)
+                if len(message.attachments) > 0:
+                    if message.attachments[0].content_type.startswith("image"):
+                        embed.set_image(url=message.attachments[0].url)
+
+                view = discord.ui.View()
+
+                view.add_item(discord.ui.Button(label="Jump to message", url=message.jump_url))
+
+                await channel.send(embed=embed, view=view)
+                await interaction.response.send_message("Featured!", ephemeral=True)
+            else:
+                await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
         print("Initialized moderation cog...")
     
-    @app_commands.command(name="ban", description="Bans a user")
-    @app_commands.describe(reason="The reason you're banning the user for")
-    @app_commands.guild_only()
-    @app_commands.default_permissions(ban_members=True)
-    async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
-        bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
-        if interaction.permissions.ban_members:
-            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
-                await member.ban(reason=reason)
-                await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
-            else:
-                await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
-        else:
-            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
-
-    @app_commands.command(name="kick", description="Kicks a user out of the server")
-    @app_commands.describe(reason="The reason you're kicking the user out for")
-    @app_commands.guild_only()
-    @app_commands.default_permissions(kick_members=True)
-    async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
-        bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
-        if interaction.permissions.kick_members:
-            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
-                await member.kick(reason=reason)
-                await interaction.response.send_message(f"Kicked **{member.name}** out", ephemeral=True)
-            else:
-                await interaction.response.send_message(f"Could not kick **{member.name}** out due to role hierarchy", ephemeral=True)
-        else:
-            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
-
-    @app_commands.context_menu(name="Message")
-    @app_commands.guild_only()
-    @app_commands.default_permissions(manage_guild=True)
-    async def dmsend_ctxt(interaction : discord.Interaction, member : discord.Member):
-        if interaction.permissions.manage_guild:
-            modal = SendMessage()
-            modal.user_id = member.id
-            await interaction.response.send_modal(modal)
-        else:
-            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
-
-    @app_commands.context_menu(name="Feature Message")
-    @app_commands.guild_only()
-    @app_commands.default_permissions(manage_messages=True)
-    async def featuremsg_ctxt(interaction : discord.Interaction, message : discord.Message):
-        if interaction.permissions.manage_messages:
-            channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel"))
-
-            embed = discord.Embed(title="Featured Message", description=message.content)
-            embed.set_author(name=f"{message.author.name}", url=None, icon_url=message.author.avatar.url if message.author.avatar is not None else None)
-            if len(message.attachments) > 0:
-                if message.attachments[0].content_type.startswith("image"):
-                    embed.set_image(url=message.attachments[0].url)
-
-            view = discord.ui.View()
-
-            view.add_item(discord.ui.Button(label="Jump to message", url=message.jump_url))
-
-            await channel.send(embed=embed, view=view)
-            await interaction.response.send_message("Featured!", ephemeral=True)
-        else:
-             await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
+    
         
     
     @commands.hybrid_command()

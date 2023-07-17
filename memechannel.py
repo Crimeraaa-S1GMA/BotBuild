@@ -8,7 +8,6 @@ import config_access
 class MemeChannel(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self._last_member = None
         print("Initialized meme channel cog...")
     
     @commands.Cog.listener()
