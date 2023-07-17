@@ -16,11 +16,11 @@ class Debug(commands.Cog):
         ctx.bot.tree.copy_global_to(guild=ctx.guild)
         await ctx.bot.tree.sync(guild=ctx.guild)
 
-        await ctx.send(content="Success")
+        await ctx.send(content="Guild Slash Command Sync: Success")
         
     @commands.command()
     async def sync_global(self, ctx: commands.Context):
         # sync globally
         await ctx.bot.tree.sync()
 
-        await ctx.send(content="Success")
+        await ctx.send(content="Global Slash Command Sync: Success")
