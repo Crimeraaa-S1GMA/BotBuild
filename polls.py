@@ -113,6 +113,7 @@ class Polls(commands.Cog):
         print("Initialized poll cog...")
     
     @app_commands.command()
+    @app_commands.guild_only()
     async def poll(self, interaction : discord.Interaction, channel : discord.TextChannel, question : str, answer_1 : str, answer_2 : str, answer_3 : str = "", answer_4 : str = "", answer_5 : str = ""):
         view = PollView()
         view.children[0].options.append(discord.SelectOption(label=answer_1, value="1"))
