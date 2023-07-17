@@ -5,7 +5,8 @@
             "choice2Users" : [],
             "choice3Users" : [],
             "choice4Users" : [],
-            "choice5Users" : []
+            "choice5Users" : [],
+            "endTime" : 0
         }
     }
 }

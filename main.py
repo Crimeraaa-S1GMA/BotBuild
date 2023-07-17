@@ -9,6 +9,8 @@ import config_access
 import moderation
 import memechannel
 import susmode
+import polls
+import debug
 
 class BotBuildClient(commands.AutoShardedBot):
     async def on_ready(self):
@@ -29,6 +31,11 @@ class BotBuildClient(commands.AutoShardedBot):
         
         if config_access.return_config_value("sus_mode_easter_egg"):
             await bot.add_cog(susmode.SusMode(self))
+        
+        if config_access.return_config_value("polls_module_enabled"):
+            await bot.add_cog(polls.Polls(self))
+        
+        await bot.add_cog(debug.Debug(self))
 
         print("__________________________\n")
         print("Ready!")

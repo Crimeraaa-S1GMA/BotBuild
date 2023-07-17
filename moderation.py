@@ -26,6 +26,7 @@ class Moderation(commands.Cog):
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_ban_enabled"):
             @bot.tree.command(name="ban", description="Bans a user")
             @app_commands.describe(reason="The reason you're banning the user for")
+            @app_commands.guild_only()
             async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
                 bot_member = await interaction.guild.fetch_member(bot.user.id)
                 if interaction.permissions.ban_members:
@@ -40,6 +41,7 @@ class Moderation(commands.Cog):
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_kick_enabled"):
             @bot.tree.command(name="kick", description="Kicks a user out of the server")
             @app_commands.describe(reason="The reason you're kicking the user out for")
+            @app_commands.guild_only()
             async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
                 bot_member = await interaction.guild.fetch_member(bot.user.id)
                 if interaction.permissions.kick_members:
@@ -53,6 +55,7 @@ class Moderation(commands.Cog):
 
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_dmsend_enabled"):
             @bot.tree.context_menu(name="Message")
+            @app_commands.guild_only()
             async def dmsend_ctxt(interaction : discord.Interaction, member : discord.Member):
                 modal = SendMessage()
                 modal.user_id = member.id
@@ -60,6 +63,7 @@ class Moderation(commands.Cog):
 
         if config_access.return_config_value("moderation_module_enabled") and config_access.return_config_value("moderation_module_feature_enabled"):
             @bot.tree.context_menu(name="Feature Message")
+            @app_commands.guild_only()
             async def featuremsg_ctxt(interaction : discord.Interaction, message : discord.Message):
                 channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel"))
 

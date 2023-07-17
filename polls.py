@@ -10,3 +10,8 @@ class Polls(commands.Cog):
         self.bot = bot
         self._last_member = None
         print("Initialized poll cog...")
+    
+    @app_commands.command()
+    async def poll(self, interaction : discord.Interaction, channel : discord.TextChannel, question : str, answer_1 : str, answer_2 : str = "", answer_3 : str = "", answer_4 : str = "", answer_5 : str = ""):
+        message = await channel.send(question)
+        await interaction.response.send_message(f"Poll sent! {message.id}", ephemeral=True)
