@@ -29,9 +29,7 @@ class BotBuildClient(commands.AutoShardedBot):
         
         if config_access.return_config_value("sus_mode_easter_egg"):
             await bot.add_cog(susmode.SusMode(self))
-        
-        for server in config_access.server_list(self.guilds):
-            await self.tree.sync(guild=server)
+
         print("__________________________\n")
         print("Ready!")
 
