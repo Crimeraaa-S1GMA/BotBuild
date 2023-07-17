@@ -25,35 +25,6 @@ class SendMessage(discord.ui.Modal, title='Send Message'):
 class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        @app_commands.command(name="ban", description="Bans a user")
-        @app_commands.describe(reason="The reason you're banning the user for")
-        @app_commands.guild_only()
-        @app_commands.default_permissions(ban_members=True)
-        async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
-            bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
-            if interaction.permissions.ban_members:
-                if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
-                    await member.ban(reason=reason)
-                    await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
-                else:
-                    await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
-            else:
-                await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
-
-        @app_commands.command(name="kick", description="Kicks a user out of the server")
-        @app_commands.describe(reason="The reason you're kicking the user out for")
-        @app_commands.guild_only()
-        @app_commands.default_permissions(kick_members=True)
-        async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
-            bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
-            if interaction.permissions.kick_members:
-                if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
-                    await member.kick(reason=reason)
-                    await interaction.response.send_message(f"Kicked **{member.name}** out", ephemeral=True)
-                else:
-                    await interaction.response.send_message(f"Could not kick **{member.name}** out due to role hierarchy", ephemeral=True)
-            else:
-                await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
 
         @app_commands.context_menu(name="Message")
         @app_commands.guild_only()
@@ -89,9 +60,32 @@ class Moderation(commands.Cog):
                 await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
         print("Initialized moderation cog...")
     
-    
-        
-    
-    @commands.hybrid_command()
-    async def ping(self, ctx):
-        await ctx.send("aaaaaa")
+    @app_commands.command(name="ban", description="Bans a user")
+    @app_commands.describe(reason="The reason you're banning the user for")
+    @app_commands.guild_only()
+    @app_commands.default_permissions(ban_members=True)
+    async def ban_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
+        bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
+        if interaction.permissions.ban_members:
+            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
+                await member.ban(reason=reason)
+                await interaction.response.send_message(f"Banned **{member.name}**", ephemeral=True)
+            else:
+                await interaction.response.send_message(f"Could not ban **{member.name}** due to role hierarchy", ephemeral=True)
+        else:
+            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
+
+    @app_commands.command(name="kick", description="Kicks a user out of the server")
+    @app_commands.describe(reason="The reason you're kicking the user out for")
+    @app_commands.guild_only()
+    @app_commands.default_permissions(kick_members=True)
+    async def kick_cmd(interaction : discord.Interaction, member : discord.Member, reason : str = ""):
+        bot_member = await interaction.guild.fetch_member(interaction.client.user.id)
+        if interaction.permissions.kick_members:
+            if member.top_role < bot_member.top_role and member.guild.owner.id != member.id:
+                await member.kick(reason=reason)
+                await interaction.response.send_message(f"Kicked **{member.name}** out", ephemeral=True)
+            else:
+                await interaction.response.send_message(f"Could not kick **{member.name}** out due to role hierarchy", ephemeral=True)
+        else:
+            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
