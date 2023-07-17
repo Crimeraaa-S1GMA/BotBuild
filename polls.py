@@ -26,4 +26,4 @@ class Polls(commands.Cog):
         view.add_item(select_menu)
 
         message = await channel.send(question, view=view)
-        await interaction.response.send_message(f"Poll sent! {message.id}", ephemeral=True)
+        await interaction.response.send_message(f"Poll sent!", ephemeral=True)
