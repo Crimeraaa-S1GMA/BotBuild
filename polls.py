@@ -119,7 +119,7 @@ class Polls(commands.Cog):
     @app_commands.command()
     @app_commands.guild_only()
     async def poll(self, interaction : discord.Interaction, channel : discord.TextChannel, question : str, answer_1 : str, answer_2 : str, answer_3 : str = "", answer_4 : str = "", answer_5 : str = ""):
-        if not config_access.return_config_value("limit_polls") or interaction.permissions.manage_guild:
+        if interaction.permissions.manage_guild:
             view = PollView()
             view.children[0].options.append(discord.SelectOption(label=answer_1, value="1"))
             view.children[0].options.append(discord.SelectOption(label=answer_2, value="2"))
@@ -142,6 +142,37 @@ class Polls(commands.Cog):
             message_content += f"\n\n`0 people voted on this poll`"
 
             message = await channel.send(message_content, view=view)
+            register_poll(message.id, question, answer_1, answer_2, answer_3, answer_4, answer_5)
+            await interaction.response.send_message(f"Poll sent!", ephemeral=True)
+        else:
+            await interaction.response.send_message(f"Insufficient permissions to perform this action", ephemeral=True)
+    
+    @app_commands.command()
+    @app_commands.guild_only()
+    async def poll_here(self, interaction : discord.Interaction, question : str, answer_1 : str, answer_2 : str, answer_3 : str = "", answer_4 : str = "", answer_5 : str = ""):
+        if not config_access.return_config_value("limit_polls") or interaction.permissions.manage_guild:
+            view = PollView()
+            view.children[0].options.append(discord.SelectOption(label=answer_1, value="1"))
+            view.children[0].options.append(discord.SelectOption(label=answer_2, value="2"))
+            if len(answer_3) > 0:
+                view.children[0].options.append(discord.SelectOption(label=answer_3, value="3"))
+            if len(answer_4) > 0:
+                view.children[0].options.append(discord.SelectOption(label=answer_4, value="4"))
+            if len(answer_5) > 0:
+                view.children[0].options.append(discord.SelectOption(label=answer_5, value="5"))
+
+            message_content = f"# **Poll: {question}**\n"
+            message_content += f"\n{answer_1} - `0%`"
+            message_content += f"\n{answer_2} - `0%`"
+            if len(answer_3) > 0:
+                message_content += f"\n{answer_3} - `0%`"
+            if len(answer_4) > 0:
+                message_content += f"\n{answer_4} - `0%`"
+            if len(answer_5) > 0:
+                message_content += f"\n{answer_5} - `0%`"
+            message_content += f"\n\n`0 people voted on this poll`"
+
+            message = await interaction.channel.send(message_content, view=view)
             register_poll(message.id, question, answer_1, answer_2, answer_3, answer_4, answer_5)
             await interaction.response.send_message(f"Poll sent!", ephemeral=True)
         else:
