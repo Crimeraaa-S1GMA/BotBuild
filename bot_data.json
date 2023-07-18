@@ -1,18 +1,18 @@
 {
-    "polls" : {
-        "0" : {
-            "pollContent" : "",
-            "pollAnswer1Content" : "",
-            "pollAnswer2Content" : "",
-            "pollAnswer3Content" : "",
-            "pollAnswer4Content" : "",
-            "pollAnswer5Content" : "",
-            "choice1Users" : [],
-            "choice2Users" : [],
-            "choice3Users" : [],
-            "choice4Users" : [],
-            "choice5Users" : [],
-            "endTime" : 0
+    "polls": {
+        "0": {
+            "choice1Users": [],
+            "choice2Users": [],
+            "choice3Users": [],
+            "choice4Users": [],
+            "choice5Users": [],
+            "endTime": 0,
+            "pollAnswer1Content": "",
+            "pollAnswer2Content": "",
+            "pollAnswer3Content": "",
+            "pollAnswer4Content": "",
+            "pollAnswer5Content": "",
+            "pollContent": ""
         }
     }
 }
