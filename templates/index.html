@@ -7,6 +7,18 @@
     <title>BotBuild Dashboard</title>
 </head>
 <body>
-    <h1>test</h1>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h1>Welcome back!</h1>
+            <div class="sidebar-button" id="sidebar-button-1">
+                Sidebar button
+            </div>
+        </div>
+        <div class="content">
+            <h2>Category content</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit temporibus optio commodi dicta. Aliquid impedit ad dolorem. Recusandae doloremque repellat similique dolor ipsum deserunt ducimus placeat laudantium voluptas? In?</p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>
