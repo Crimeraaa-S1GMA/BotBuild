@@ -11,6 +11,7 @@ import memechannel
 import susmode
 import polls
 import debug
+import greetings
 
 class BotBuildClient(commands.AutoShardedBot):
     async def on_ready(self):
@@ -35,26 +36,13 @@ class BotBuildClient(commands.AutoShardedBot):
         if config_access.return_config_value("polls_module_enabled"):
             await bot.add_cog(polls.Polls(self))
         
+        if config_access.return_config_value("welcome_module_enabled"):
+            await bot.add_cog(greetings.Greetings(self))
+        
         await bot.add_cog(debug.Debug(self))
 
         print("__________________________\n")
         print("Ready!")
-
-    async def on_member_join(self, member):
-        if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_join_enabled") \
-                and member.guild == bot.get_channel(config_access.return_config_value("welcome_module_join_channel")).guild:
-            channel = bot.get_channel(config_access.return_config_value("welcome_module_join_channel"))
-            await channel.send(config_access.return_config_value("welcome_module_join_message").format(member_mention=member.mention))
-            guild = member.guild
-            for role_id in config_access.return_config_value("welcome_module_join_role_ids"):
-                role = guild.get_role(role_id)
-                await member.add_roles(role)
-
-    async def on_member_remove(self, member):
-        if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_leave_enabled") \
-                and member.guild == bot.get_channel(config_access.return_config_value("welcome_module_leave_channel")).guild:
-            channel = bot.get_channel(config_access.return_config_value("welcome_module_leave_channel"))
-            await channel.send(config_access.return_config_value("welcome_module_leave_message").format(member_mention=member.mention))
 
 
 
