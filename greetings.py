@@ -22,8 +22,8 @@ class Greetings(commands.Cog):
                 await member.add_roles(role)
 
     @commands.Cog.listener()
-    async def on_member_remove(self, member):
+    async def on_raw_member_remove(self, payload):
         if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_leave_enabled") \
-                and member.guild == self.bot.get_channel(config_access.return_config_value("welcome_module_leave_channel")).guild:
+                and payload.guild_id == self.bot.get_channel(config_access.return_config_value("welcome_module_leave_channel")).guild.id:
             channel = self.bot.get_channel(config_access.return_config_value("welcome_module_leave_channel"))
-            await channel.send(config_access.return_config_value("welcome_module_user_leave_message").format(member_mention=member.mention))
+            await channel.send(config_access.return_config_value("welcome_module_user_leave_message").format(member_mention=payload.user.mention))
