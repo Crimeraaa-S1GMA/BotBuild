@@ -9,16 +9,28 @@
   "welcome_module_incl_bots_join" : false,
   "welcome_module_incl_bots_leave" : false,
   "welcome_module_join_role_ids" : [],
-  "welcome_module_join_channel" : 1129473586739036423,
-  "welcome_module_leave_channel" : 1129473586739036423,
+  "welcome_module_join_channel" : {
+    "1126581141642674267" : 1129473586739036423,
+    "1131237442243010650" : 1131237714142957749
+  },
+  "welcome_module_leave_channel" : {
+    "1126581141642674267" : 1129473586739036423,
+    "1131237442243010650" : 1131237714142957749
+  },
   "moderation_module_enabled" : true,
   "moderation_module_ban_enabled" : true,
   "moderation_module_kick_enabled" : true,
   "moderation_module_dmsend_enabled" : true,
   "moderation_module_feature_enabled" : true,
-  "moderation_module_feature_channel" : 1130138048487755856,
+  "moderation_module_feature_channel" : {
+    "1126581141642674267" : 1130138048487755856,
+    "1131237442243010650" : 1131237679745474590
+  },
   "meme_channel_module_enabled" : true,
-  "meme_channel" : 1130132288601067531,
+  "meme_channel" : {
+    "1126581141642674267" : 1130132288601067531,
+    "1131237442243010650" : 1131237691896369152
+  },
   "polls_module_enabled" : true,
   "limit_polls" : true
 }

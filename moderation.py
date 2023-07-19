@@ -44,7 +44,7 @@ class Moderation(commands.Cog):
 
     async def featuremsg_ctxt(self, interaction : discord.Interaction, message : discord.Message):
         if interaction.permissions.manage_messages:
-            channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel"))
+            channel = interaction.guild.get_channel(config_access.return_config_value("moderation_module_feature_channel")[str(interaction.guild.id)])
 
             embed = discord.Embed(title="Featured Message", description=message.content)
             embed.set_author(name=f"{message.author.name}", url=None, icon_url=message.author.avatar.url if message.author.avatar is not None else None)

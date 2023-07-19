@@ -15,7 +15,7 @@ class MemeChannel(commands.Cog):
         if message.author == self.bot.user:
             return
         
-        if config_access.return_config_value("meme_channel_module_enabled") and message.channel.id == config_access.return_config_value("meme_channel"):
+        if config_access.return_config_value("meme_channel_module_enabled") and message.channel.id == config_access.return_config_value("meme_channel")[str(message.guild.id)]:
             if len(message.attachments) > 0:
                 is_memes = True
 
