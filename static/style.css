@@ -7,6 +7,22 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+a {
+    color: #5362e9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #6473fa;
+    text-decoration: none;
+}
+
+a:active {
+    color: #7584fb;
+    text-decoration: underline;
+}
+
 button {
     background-color: #3f1ba4;
     color: white;
@@ -65,4 +81,8 @@ button:active {
     padding-right: 20px;
     height: 100vh;
     flex-grow: 1;
+}
+
+.warning-text {
+    color: #bf0202;
 }
