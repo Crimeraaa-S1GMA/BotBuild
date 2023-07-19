@@ -7,6 +7,25 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+button {
+    background-color: #3f1ba4;
+    color: white;
+    font-size: 15px;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4f2cb5;
+}
+
+button:active {
+    background-color: #5f3dc6;
+}
+
 .dashboard-container {
     display: flex;
     justify-content: stretch;

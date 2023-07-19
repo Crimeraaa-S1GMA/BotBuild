@@ -6,7 +6,7 @@
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <title>BotBuild Dashboard</title>
 </head>
-<body>
+<body onload="loadInitialValues()">
     <div class="dashboard-container">
         <div class="sidebar">
             <h1>Welcome back!</h1>
@@ -15,8 +15,13 @@
             </div>
         </div>
         <div class="content">
-            <h2>Category content</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit temporibus optio commodi dicta. Aliquid impedit ad dolorem. Recusandae doloremque repellat similique dolor ipsum deserunt ducimus placeat laudantium voluptas? In?</p>
+            <div class="category" id="bot-credentials">
+                <h2>Bot credentials</h2>
+                <p>Set the credentials for your bot here.</p>
+                <div><span>Bot token:</span>
+                    <input type="text" id="bot-credentials-token"></div>
+                <button onclick="botCredentialsSave()">Save</button>
+            </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
