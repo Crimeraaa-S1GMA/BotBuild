@@ -44,15 +44,15 @@ class BotBuildClient(commands.AutoShardedBot):
         print("__________________________\n")
         print("Ready!")
 
-token_file = open("token.txt", "r")
-loaded_token = token_file.read()
-
-token_file.close()
-
-intents = discord.Intents.all()
-
-bot_client = BotBuildClient(intents=intents, command_prefix="!")
 try:
+    token_file = open("token.txt", "r")
+    loaded_token = token_file.read()
+
+    token_file.close()
+
+    intents = discord.Intents.all()
+
+    bot_client = BotBuildClient(intents=intents, command_prefix="!")
     bot_client.run(loaded_token)
 except:
     print("Bot login failed. Check if you entered the correct token in the dashboard or the token.txt file.")
