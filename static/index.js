@@ -10,6 +10,11 @@ function loadDashboard() {
 
   bindSidebarButton("open-immersive-welcome-experience", "immersive-welcome-experience");
   bindSidebarButton("open-bot-credentials", "bot-credentials");
+  bindSidebarButton("open-server-management", "server-management");
+  bindSidebarButton("open-moderation-module", "moderation-module");
+  bindSidebarButton("open-greetings-module", "greetings-module");
+  bindSidebarButton("open-special-channels-module", "special-channels-module");
+  bindSidebarButton("open-polls-module", "polls-module");
 }
 
 function bindSidebarButton(buttonId, pageId) {
