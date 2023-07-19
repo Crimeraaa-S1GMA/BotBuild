@@ -6,15 +6,22 @@
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <title>BotBuild Dashboard</title>
 </head>
-<body onload="loadInitialValues()">
+<body onload="loadDashboard()">
     <div class="dashboard-container">
         <div class="sidebar">
             <h1>Welcome back!</h1>
-            <div class="sidebar-button" id="sidebar-button-1">
-                Sidebar button
+            <div class="sidebar-button" id="open-immersive-welcome-experience">
+                Home
+            </div>
+            <div class="sidebar-button" id="open-bot-credentials">
+                Bot credentials
             </div>
         </div>
         <div class="content">
+            <div class="category" id="immersive-welcome-experience">
+                <h1>Welcome to BotBuild!</h1>
+                <p>Start by changing one of these settings for your bot.</p>
+            </div>
             <div class="category" id="bot-credentials">
                 <h2>Bot credentials</h2>
                 <p>Set the credentials for your bot here.</p>

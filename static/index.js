@@ -1,8 +1,36 @@
-var myDiv = document.getElementById('sidebar-button-1');
+// var myDiv = document.getElementById('sidebar-button-1');
 
-myDiv.addEventListener('click', function() {
-  alert('test');
-});
+// myDiv.addEventListener('click', function() {
+//   alert('test');
+// });
+
+function loadDashboard() {
+  loadDashboardMenu("immersive-welcome-experience");
+  loadInitialValues();
+
+  bindSidebarButton("open-immersive-welcome-experience", "immersive-welcome-experience");
+  bindSidebarButton("open-bot-credentials", "bot-credentials");
+}
+
+function bindSidebarButton(buttonId, pageId) {
+  let button = document.getElementById(buttonId);
+
+  button.addEventListener('click', function() {
+    loadDashboardMenu(pageId);
+  });
+}
+
+function loadDashboardMenu(pageId) {
+  let menus = document.getElementsByClassName("category");
+  
+  Array.from(menus).forEach((element) => {
+    if(element.id == pageId) {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  });
+}
 
 function loadInitialValues() {
   var url = '/settings';
@@ -11,7 +39,6 @@ function loadInitialValues() {
   })
     .then(response => response.json())
     .then(responseData => {
-      console.log(responseData);
       document.getElementById("bot-credentials-token").setAttribute("value", responseData.token)
     })
     .catch(error => {
