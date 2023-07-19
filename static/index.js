@@ -15,6 +15,7 @@ function loadDashboard() {
   bindSidebarButton("open-greetings-module", "greetings-module");
   bindSidebarButton("open-special-channels-module", "special-channels-module");
   bindSidebarButton("open-polls-module", "polls-module");
+  bindSidebarButton("open-slash-commands", "slash-commands");
 }
 
 function bindSidebarButton(buttonId, pageId) {
@@ -70,6 +71,20 @@ function botCredentialsSave() {
     .then(response => response.text())
     .then(responseData => {
       console.log(responseData);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+function slashCommandsRegister() {
+  var url = '/register-slash-commands';
+  fetch(url, {
+    method: 'GET'
+  })
+    .then(response => response.text())
+    .then(responseData => {
+      console.log(responseData)
     })
     .catch(error => {
       console.error('Error:', error);

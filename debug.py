@@ -1,6 +1,6 @@
 import discord
 import discord.ui
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord import app_commands
 
 import config_access
@@ -8,19 +8,22 @@ import config_access
 class Debug(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.dashboard_request_check.start()
         print("Initialized debug cog...")
     
-    @commands.command()
-    async def sync(self, ctx: commands.Context):
-        # sync to the guild where the command was used
-        ctx.bot.tree.copy_global_to(guild=ctx.guild)
-        await ctx.bot.tree.sync(guild=ctx.guild)
+    def cog_unload(self):
+        self.dashboard_request_check.cancel()
+    
+    @tasks.loop(seconds=2.0)
+    async def dashboard_request_check(self):
+        req = ""
 
-        await ctx.send(content="Guild Slash Command Sync: Success")
+        with open("dashboard_req_to_bot", "r") as req_load:
+            req = req_load.read().split()
         
-    @commands.command()
-    async def sync_global(self, ctx: commands.Context):
-        # sync globally
-        await ctx.bot.tree.sync()
-
-        await ctx.send(content="Global Slash Command Sync: Success")
+        if "regcmd" in req:
+            await self.bot.tree.sync()
+            print("Registered slash commands!")
+        
+        with open("dashboard_req_to_bot", "w") as req_save:
+            req_save.truncate()

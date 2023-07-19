@@ -16,6 +16,9 @@
             <div class="sidebar-button" id="open-bot-credentials">
                 Bot credentials
             </div>
+            <div class="sidebar-button" id="open-slash-commands">
+                Commands
+            </div>
             <div class="sidebar-button" id="open-server-management">
                 Servers
             </div>
@@ -35,7 +38,10 @@
         <div class="content">
             <div class="category" id="immersive-welcome-experience">
                 <h1>Welcome to BotBuild!</h1>
-                <p>Start by changing one of these settings for your bot.</p>
+                <p>New here? Start with these options, the rest can wait:</p>
+                <p><a href="#">Connect to your Discord bot account</a></p>
+                <p><a href="#">Set up greetings</a></p>
+                <p><a href="#">Register slash commands</a></p>
             </div>
             <div class="category" id="bot-credentials">
                 <h2>Bot credentials</h2>
@@ -45,6 +51,13 @@
                     <input type="password" id="bot-credentials-token"></div>
                 <p class="warning-text">IMPORTANT: Keep your bot token safe and do not give it to anyone! You can find it in the token.txt file if you forget it.</p>
                 <button onclick="botCredentialsSave()">Save</button>
+            </div>
+            <div class="category" id="slash-commands">
+                <h2>Slash commands</h2>
+                <p>To be able to use most of your bot's functionality, please click the button below to signal to the bot that you want to register the slash commands.</p>
+                <p>Due to a limitation on Discord's side, the commands may take for up to an hour to register. Please keep your bot on during this time.</p>
+                <p>Please don't spam the registration button, as Discord may ratelimit your bot.</p>
+                <button onclick="slashCommandsRegister()">Register</button>
             </div>
         </div>
     </div>
