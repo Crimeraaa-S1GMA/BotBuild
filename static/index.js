@@ -30,7 +30,7 @@ function loadServerList() {
       serverList.innerHTML = ""
       for(let key in responseData) {
         let value = responseData[key];
-        let element = document.createElement("p");
+        let element = document.createElement("li");
         element.innerHTML = value["name"];
         serverList.appendChild(element);
       }
