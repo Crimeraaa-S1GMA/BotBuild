@@ -37,6 +37,16 @@ def bot_credentials_get():
 
     return data_json
 
+@app.route("/servers", methods=["GET"])
+def servers():
+    servers = None
+    with open("bot_storage_cache.json", "r") as file:
+        servers = json.loads(file.read())
+    
+    servers_only = json.dumps(servers["servers"])
+
+    return servers_only
+
 @app.route("/register-slash-commands", methods=["GET"])
 def register_slash_commands():
     with open("dashboard_req_to_bot", "a") as file:
