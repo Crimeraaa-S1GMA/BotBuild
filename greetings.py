@@ -22,6 +22,6 @@ class Greetings(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_member_remove(self, payload):
-        if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_leave_enabled"):
+        if config_access.return_config_value("welcome_module_enabled") and config_access.return_config_value("welcome_module_user_leave_enabled") and self.bot.user.id == payload.user.id:
             channel = self.bot.get_channel(config_access.return_config_value("welcome_module_leave_channel")[str(payload.guild_id)])
             await channel.send(config_access.return_config_value("welcome_module_user_leave_message").format(member_mention=payload.user.mention))
