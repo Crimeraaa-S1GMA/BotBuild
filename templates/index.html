@@ -59,6 +59,13 @@
                 <p>Please don't spam the registration button, as Discord may ratelimit your bot.</p>
                 <button onclick="slashCommandsRegister()">Register</button>
             </div>
+            <div class="category" id="server-management">
+                <h2>Servers</h2>
+                <p>Here is a list of all the servers your bot is in.</p>
+                <div id="server-management-server-list">
+
+                </div>
+            </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='index.js') }}"></script>

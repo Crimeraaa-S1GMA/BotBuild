@@ -7,6 +7,7 @@
 function loadDashboard() {
   loadDashboardMenu("immersive-welcome-experience");
   loadInitialValues();
+  loadServerList();
 
   bindSidebarButton("open-immersive-welcome-experience", "immersive-welcome-experience");
   bindSidebarButton("open-bot-credentials", "bot-credentials");
@@ -16,6 +17,27 @@ function loadDashboard() {
   bindSidebarButton("open-special-channels-module", "special-channels-module");
   bindSidebarButton("open-polls-module", "polls-module");
   bindSidebarButton("open-slash-commands", "slash-commands");
+}
+
+function loadServerList() {
+  var url = '/servers';
+  fetch(url, {
+    method: 'GET'
+  })
+    .then(response => response.json())
+    .then(responseData => {
+      let serverList = document.getElementById("server-management-server-list");
+      serverList.innerHTML = ""
+      for(let key in responseData) {
+        let value = responseData[key];
+        let element = document.createElement("p");
+        element.innerHTML = value["name"];
+        serverList.appendChild(element);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
 
 function bindSidebarButton(buttonId, pageId) {
