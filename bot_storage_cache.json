@@ -1,5 +1,12 @@
 {
-    "servers" : {
-        
+    "servers": {
+        "1126581141642674267": {
+            "icon_url": "",
+            "name": "BotBuild Support"
+        },
+        "1131237442243010650": {
+            "icon_url": "",
+            "name": "botbuild testing 2"
+        }
     }
 }

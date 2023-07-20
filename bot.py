@@ -5,6 +5,7 @@ from discord.ext import commands
 import asyncio
 import threading
 import config_access
+import json
 
 import moderation
 import memechannel
@@ -20,6 +21,10 @@ class BotBuildClient(commands.AutoShardedBot):
         print("Welcome to BotBuild!")
         print("__________________________\n")
         print(f'Account: {self.user.name}!')
+
+        self.clean_servers()
+        for server in self.guilds:
+            self.add_server(server)
         
         print("__________________________\n")
         print("Initializing cogs...")
@@ -43,6 +48,31 @@ class BotBuildClient(commands.AutoShardedBot):
 
         print("__________________________\n")
         print("Ready!")
+    
+    def clean_servers(self):
+        bot_cache = {}
+        with open("bot_storage_cache.json", "r") as bot_cache_load:
+            bot_cache = json.loads(bot_cache_load.read())
+        
+        bot_cache["servers"] = {}
+
+        with open("bot_storage_cache.json", "w") as bot_cache_save:
+            bot_cache_save.write(json.dumps(bot_cache, sort_keys=True, indent=4))
+    
+    def add_server(self, server : discord.Guild):
+        bot_cache = {}
+        with open("bot_storage_cache.json", "r") as bot_cache_load:
+            bot_cache = json.loads(bot_cache_load.read())
+        
+        bot_cache["servers"][str(server.id)] = {
+            "name" : server.name,
+            "icon_url" : server.icon.url if server.icon is not None else ""
+        }
+
+        with open("bot_storage_cache.json", "w") as bot_cache_save:
+            bot_cache_save.write(json.dumps(bot_cache, sort_keys=True, indent=4))
+        
+
 
 try:
     token_file = open("token.txt", "r")
