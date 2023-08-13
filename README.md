@@ -1,4 +1,5 @@
 This project is currently in a very early development stage. I would not recommend using it, and even if you do, there's not much point as stuff is still being added.
+Also, it's currently put on hold. (Again)
 # BotBuild
 An open-source, self-hosted alternative to mainstream Discord bots, written in Python.
 
